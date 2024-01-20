@@ -37,7 +37,7 @@ const ButtonSubmit: React.FC<ButtonProps> = ({
           "bg-red-500  hover:bg-rose-600 focus-visible:outline-rose-700",
         !secondary &&
           !danger &&
-          "bg-sky-400 hover:bg-sky-500 focus-visible:outline-sky-700"
+          "bg-slate-900 hover:bg-slate-800 focus-visible:outline-slate-700 dark:bg-white dark:hover:bg-gray-100 dark:text-slate-900 dark:focus-visible:outline-gray-100"
       )}
     >
       {children}

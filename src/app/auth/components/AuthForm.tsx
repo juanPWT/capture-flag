@@ -52,7 +52,10 @@ const AuthForm = () => {
     if (variant === "register") {
       axios
         .post("/api/register", data)
-        .then(() => signIn("credentials", data))
+        .then(() => {
+          signIn("credentials", data);
+          toast.success("success register");
+        })
         .catch(() => toast.error("error register"))
         .finally(() => setIsLoading(false));
     }
@@ -94,8 +97,8 @@ const AuthForm = () => {
   };
 
   return (
-    <div className="w-full sm:px-24 md:px-40 xl:px-[400px] flex items-center justify-center">
-      <div className="bg-white/30 shadow-lg rounded-md w-full px-10 py-5">
+    <div className="w-full  sm:px-24 md:px-40 xl:px-[400px] flex items-center justify-center ">
+      <div className="bg-gray-100 shadow-lg rounded-md w-full px-10 py-5 dark:bg-gray-500/20">
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col w-full"
@@ -131,7 +134,9 @@ const AuthForm = () => {
           </ButtonSubmit>
         </form>
         <div className="w-full flex flex-col items-center justify-center mt-2">
-          <span className="text-gray-400 text-sm font-semibold">Or with</span>
+          <span className="text-gray-400 text-sm font-semibold dark:text-white">
+            Or with
+          </span>
         </div>
         <div className="my-5 flex gap-2">
           <AuthSocialButton

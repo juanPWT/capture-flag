@@ -7,7 +7,7 @@ import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
 interface InputProps {
   label: string;
   id: string;
-  type?: string;
+  type: "text" | "password" | "email";
   required?: boolean;
   register: UseFormRegister<FieldValues>;
   errors: FieldErrors;
@@ -25,7 +25,10 @@ const Input: React.FC<InputProps> = ({
 }) => {
   return (
     <div className="my-1">
-      <label htmlFor={id} className="text-sm text-gray-500 font-semibold">
+      <label
+        htmlFor={id}
+        className="text-sm text-gray-500 font-semibold dark:text-white"
+      >
         {label}
       </label>
       <div className="mt-1 w-full">
@@ -39,6 +42,8 @@ const Input: React.FC<InputProps> = ({
             `
           form-input
             block
+            py-2
+            px-4
             w-full
             rounded-md
             shadow-sm
@@ -49,6 +54,8 @@ const Input: React.FC<InputProps> = ({
             focus:ring-indigo-500
             text-gray-900
             placeholder-gray-300
+            dark:bg-slate-950
+            dark:text-white
           `,
             errors[id] && "focus:ring-red-500",
             disable && "bg-gray-100"

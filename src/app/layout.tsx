@@ -3,12 +3,14 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import ToastContext from "./context/ToastContext";
 import AuthContext from "./context/AuthContext";
+import NextThemesProvider from "./provider/NextThemesProvider";
+import ConfettiProvider from "./provider/ConfettiProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Template Next Auth",
-  description: "Template Next Auth",
+  title: "capture flag",
+  description: "capture flag",
 };
 
 export default function RootLayout({
@@ -17,12 +19,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <AuthContext>
-          <ToastContext />
-          {children}
-        </AuthContext>
+        <NextThemesProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <ConfettiProvider>
+            <AuthContext>
+              <ToastContext />
+              {children}
+            </AuthContext>
+          </ConfettiProvider>
+        </NextThemesProvider>
       </body>
     </html>
   );

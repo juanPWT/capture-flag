@@ -1,45 +1,81 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-
 model User {
-  id                 Int          @id @default(autoincrement())
-  name               String?
-  email              String      @unique
-  emailVerified      DateTime?
-  image              String?
-  hashedPassword     String?
-  createdAt          DateTime    @default(now())
-  updatedAt          DateTime    @updatedAt
-
-  accounts           Account[]
+  id             Int       @id @default(autoincrement())
+  name           String?
+  email          String    @unique
+  emailVerified  DateTime?
+  image          String?
+  hashedPassword String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  accounts       Account[]
+  Jawab          Jawab[]
+  Soal           Soal[]
+  Flag           Flag[]
 }
 
 model Account {
-  id                 Int          @id @default(autoincrement())
-  userId             Int
-  type               String
-  provider           String
-  providerAccountId  String
-  refresh_token      String?
-  access_token       String?
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String?
-  session_state      String?
-
-  user               User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id                Int     @id @default(autoincrement())
+  userId            Int
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
 
+model Flag {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  flag      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+
+  Soal      Soal[]
+}
+
+model Jawab {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  soalId    Int
+  jawaban   String
+  poin      Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Soal      Soal     @relation(fields: [soalId], references: [id], onDelete: Cascade)
+  User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Soal {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  soal      String
+  file      String?
+  flagId    Int
+  poin      Int
+  isSolved  Boolean  @default(false)
+  kategori  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Jawab     Jawab[]
+  Flag      Flag     @relation(fields: [flagId], references: [id], onDelete: Cascade)
+  User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
