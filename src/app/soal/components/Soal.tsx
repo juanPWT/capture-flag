@@ -23,14 +23,20 @@ const Soal: React.FC<SoalProps> = ({ createdAt, flag, id, soal, file }) => {
     <Card>
       <CardHeader>
         <div className="flex flex-col justify-start items-start gap-1">
-          <h1 className="font-semibold text-xl text-slate-900">Soal {id}</h1>
-          <p className="text-xs font-light text-slate-500">{createdAt}</p>
+          <h1 className="font-semibold text-xl text-slate-900 dark:text-white">
+            Soal {id}
+          </h1>
+          <p className="text-xs font-light text-slate-500 dark:text-white">
+            {createdAt}
+          </p>
         </div>
       </CardHeader>
       <CardContent>
-        <p className="text-sm font-medium text-slate-800">{soal}</p>
+        <p className="text-sm font-medium text-slate-800 dark:text-white">
+          {soal}
+        </p>
 
-        <p className="my-2 text-slate-600 font-light">
+        <p className="my-2 text-slate-600 font-light dark:text-white">
           flag: {flag ? flag : "Belum ada flag"}
         </p>
 

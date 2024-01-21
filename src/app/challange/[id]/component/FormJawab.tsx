@@ -61,8 +61,8 @@ const FormJawab: React.FC<FormJawabProps> = ({
         toast.success(
           `congrat your solve this challange from ${ownerChallange}`
         );
-        router.push("/challange");
-        // window.location.href = "/challange";
+        // router.push("/challange");
+        window.location.href = "/challange";
       })
       .catch((err) => {
         console.log(err);

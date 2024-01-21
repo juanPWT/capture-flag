@@ -21,6 +21,17 @@ export const POST = async (req: NextRequest) => {
       return new NextResponse("Flag wrong and invalid", { status: 400 });
     }
 
+    //duplicate flag
+    const soalValidateFlag = await prisma.soal.findFirst({
+      where: {
+        flagId: flagData.id,
+      },
+    });
+
+    if (soalValidateFlag) {
+      return new NextResponse("Flag already used", { status: 400 });
+    }
+
     // file
     const file: File | null = form.get("file") as unknown as File;
 
