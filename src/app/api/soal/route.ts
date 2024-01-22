@@ -21,7 +21,7 @@ export const POST = async (req: NextRequest) => {
       return new NextResponse("Flag wrong and invalid", { status: 400 });
     }
 
-    //duplicate flag
+    //if duplicate flag
     const soalValidateFlag = await prisma.soal.findFirst({
       where: {
         flagId: flagData.id,
@@ -35,6 +35,7 @@ export const POST = async (req: NextRequest) => {
     // file
     const file: File | null = form.get("file") as unknown as File;
 
+    // save image
     if (file) {
       const bytes = await file.arrayBuffer();
       const buffer = Buffer.from(bytes);
@@ -48,6 +49,24 @@ export const POST = async (req: NextRequest) => {
     const poin: string = form.get("poin") as string;
     const kategori: string = form.get("kategori") as string;
 
+    //validate poin soal under 0
+    if (Number(poin) < 1) {
+      return new NextResponse("Poin must be greater than 0", { status: 400 });
+    }
+
+    //if user have 0 poin
+    if (Number(currentUser?.poin === 0)) {
+      return new NextResponse("you have 0 poin, cannot generate challenge", {
+        status: 400,
+      });
+    }
+
+    //validate upper than currentUser poin
+    if (Number(poin) > (currentUser?.poin || 0)) {
+      return new NextResponse("your poin are low ", { status: 400 });
+    }
+
+    //save soal
     const newSoal = await prisma.soal.create({
       data: {
         userId: currentUser?.id as number,
@@ -62,6 +81,16 @@ export const POST = async (req: NextRequest) => {
     if (!newSoal) {
       return new NextResponse("failed to generte soal", { status: 400 });
     }
+
+    //update user poin
+    const updatePoin = await prisma.user.update({
+      where: {
+        id: Number(currentUser?.id),
+      },
+      data: {
+        poin: Number(currentUser?.poin) - Number(poin),
+      },
+    });
 
     return new NextResponse("success generate soal", { status: 200 });
   } catch (error) {

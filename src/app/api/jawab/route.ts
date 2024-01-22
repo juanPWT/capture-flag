@@ -38,6 +38,16 @@ export const POST = async (req: NextRequest) => {
       );
     }
 
+    //updte user poin
+    const updatePoin = await prisma.user.update({
+      where: {
+        id: Number(currentUser?.id),
+      },
+      data: {
+        poin: Number(currentUser?.poin) + Number(poin),
+      },
+    });
+
     return new NextResponse("success insert jawaban", { status: 200 });
   } catch (error) {
     console.log(error);

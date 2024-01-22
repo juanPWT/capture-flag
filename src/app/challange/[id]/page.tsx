@@ -5,11 +5,13 @@ import getChallangeById from "@/app/action/getChallangeById";
 import { formatDate } from "../../hook/formatDate";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import DownloadButton from "./component/DownloadButton";
+import getCurrentUser from "@/app/action/getCurrentUser";
 
 const ChallangeById = async ({ params }: { params: { id: number } }) => {
   const id = params.id;
 
   const challange = await getChallangeById(Number(id));
+  const currentUser = await getCurrentUser();
 
   return (
     <GuestLayout>
@@ -56,12 +58,18 @@ const ChallangeById = async ({ params }: { params: { id: number } }) => {
             <DownloadButton file={challange?.file || null} />
           </div>
           <div className="w-full mt-3">
-            <FormJawab
-              flag={challange?.Flag.flag}
-              ownerChallange={challange?.User.name}
-              soalId={challange?.id}
-              poin={challange?.poin}
-            />
+            {currentUser?.id === challange?.userId ? (
+              <p className="font-semibold w-full text-lg text-center">
+                This your challange!!
+              </p>
+            ) : (
+              <FormJawab
+                flag={challange?.Flag.flag}
+                ownerChallange={challange?.User.name}
+                soalId={challange?.id}
+                poin={challange?.poin}
+              />
+            )}
           </div>
         </div>
       </div>

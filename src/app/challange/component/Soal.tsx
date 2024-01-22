@@ -66,14 +66,14 @@ const Soals: React.FC<SoalsProps> = ({ soal }) => {
       )}
 
       <CardFooter className="flex justify-end items-end gap-3">
-        <div className="flex justify-center items-center gap-1 text-sm">
+        {/* <div className="flex justify-center items-center gap-1 text-sm">
           <AiTwotoneLike />
           <p>100</p>
         </div>
         <div className="flex justify-center items-center gap-1 text-sm">
           <FaPercentage />
           <p>100 %</p>
-        </div>
+        </div> */}
         <div className="flex justify-center items-center gap-1 text-sm">
           <RiCopperCoinLine />
           <p>{soal.poin}</p>

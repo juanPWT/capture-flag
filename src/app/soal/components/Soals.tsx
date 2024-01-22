@@ -35,6 +35,7 @@ const Soals = async () => {
             soal={data.soal}
             flag={data.Flag.flag}
             file={data.file || ""}
+            isSolve={data.isSolved}
           />
         );
       })}

@@ -1,5 +1,4 @@
 import getCurrentUser from "@/app/action/getCurrentUser";
-import getPoinByUser from "@/app/action/getPoinByUser";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
 import React from "react";
@@ -7,7 +6,6 @@ import { FaArrowLeft } from "react-icons/fa";
 
 const Header = async () => {
   const currentUser = await getCurrentUser();
-  const poin = await getPoinByUser();
 
   return (
     <div className="w-full flex flex-col">
@@ -26,7 +24,9 @@ const Header = async () => {
         </Avatar>
         <div className="text-center lg:text-start my-auto">
           <h1 className="text-3xl font-bold">{currentUser?.name}</h1>
-          <h2 className="text-xl font-medium">Total poin : {poin}</h2>
+          <h2 className="text-xl font-medium">
+            Total poin : {currentUser?.poin}
+          </h2>
         </div>
       </div>
     </div>

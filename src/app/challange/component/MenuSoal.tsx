@@ -18,7 +18,6 @@ const MenuSoal = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="center">
-        <DropdownMenuItem>hint</DropdownMenuItem>
         <DropdownMenuItem>shere</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
