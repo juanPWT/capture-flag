@@ -7,7 +7,6 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
-import { CiSettings } from "react-icons/ci";
 import { MdOutlineAccountCircle } from "react-icons/md";
 
 interface UserDropdownProps {
@@ -26,15 +25,12 @@ const UserDropdown: React.FC<UserDropdownProps> = ({ image, align }) => {
       </DropdownMenuTrigger>
       <DropdownMenuContent align={align}>
         <DropdownMenuItem asChild>
-          <Link href={"#"} className="flex justify-start gap-2 items-center">
-            <CiSettings />
-            <span>settings</span>
-          </Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem asChild>
-          <Link href={"#"} className="flex justify-start gap-2 items-center">
+          <Link
+            href={"/account"}
+            className="flex justify-start gap-2 items-center"
+          >
             <MdOutlineAccountCircle />
-            <span>account</span>
+            <span>setting account</span>
           </Link>
         </DropdownMenuItem>
       </DropdownMenuContent>

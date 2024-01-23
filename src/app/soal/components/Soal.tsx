@@ -78,7 +78,9 @@ const Soal: React.FC<SoalProps> = ({
           <MdDelete />
         </Button> */}
         <RiCopperCoinFill className="my-auto" />
-        <p className="my-auto  text-slate-900 font-semibold">5</p>
+        <p className="my-auto  text-slate-900 font-semibold dark:text-white">
+          5
+        </p>
       </CardFooter>
     </Card>
   );

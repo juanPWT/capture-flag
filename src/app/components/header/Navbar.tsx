@@ -5,6 +5,7 @@ import ButtonSubmit from "../ButtonSubmit";
 import IsAuthenticated from "../../hook/IsAuthenticated";
 import { ModeToggle } from "@/components/ui/toogle-mode";
 import Menu from "../Menu";
+import Link from "next/link";
 
 const Navbar = () => {
   const router = useRouter();
@@ -13,9 +14,12 @@ const Navbar = () => {
     <nav className="w-full  flex justify-between fixed top-0 px-10 py-3 md:py-5 z-50">
       {/* start */}
       <div className="w-full flex flex-col md:flex-row justify-start items-start">
-        <h1 className="text-sm md:text-xl my-auto font-bold  text-gray-700 dark:text-white">
+        <Link
+          href={"/"}
+          className="text-sm md:text-xl my-auto font-bold  text-gray-700 dark:text-white"
+        >
           Capture flag
-        </h1>
+        </Link>
       </div>
       {/* center  */}
       <div className="w-full flex justify-center items-center">

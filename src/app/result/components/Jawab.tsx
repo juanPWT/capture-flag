@@ -34,6 +34,7 @@ const Jawab: React.FC<JawabProps> = ({
                 src={image || "./person.png"}
                 width={100}
                 height={100}
+                className="bg-white"
               />
               <AvatarFallback>p</AvatarFallback>
             </Avatar>

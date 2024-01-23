@@ -19,7 +19,10 @@ const Header = async () => {
       </div>
       <div className="my-10 flex flex-col lg:flex-row gap-2 w-full items-center justify-center lg:items-start lg:justify-start">
         <Avatar className="w-[150px] h-[150px]">
-          <AvatarImage src={currentUser?.image || "./person.png"} />
+          <AvatarImage
+            src={currentUser?.image || "./person.png"}
+            className="bg-white"
+          />
           <AvatarFallback>P</AvatarFallback>
         </Avatar>
         <div className="text-center lg:text-start my-auto">
